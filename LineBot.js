@@ -22,6 +22,7 @@ function replyMessage(token, message) {
       'Authorization': 'Bearer ' + ACCESS_TOKEN,
     },
     'method': 'post',
+    'muteHttpExceptions': true,
     'payload': JSON.stringify({
       'replyToken': token,
       'messages': [{
@@ -39,6 +40,7 @@ function pushMessage(to, message) {
       'Authorization': 'Bearer ' + ACCESS_TOKEN,
     },
     'method': 'post',
+    'muteHttpExceptions': true,
     'payload': JSON.stringify({
       'to': to,
       'messages': [{
