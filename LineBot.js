@@ -76,17 +76,20 @@ function notice() {
   var dayStr = ["日", "月", "火", "水", "木", "金", "土"];
   var now = new Date();
   for (var i=1; i<data.length; i++) {
-    var [minute, hour, dayOfMonth, month, dayOfWeek, weekNum, message, to] = data[i];
+    var [year, month, dayOfMonth, weekNum, dayOfWeek, hour, minute, message, to] = data[i];
 
-    if (
-      ( minute     ==  now.getMinutes()      || minute     === "*")
-    && (hour       ==  now.getHours()        || hour       === "*")
-    && (dayOfMonth ==  now.getDate()         || dayOfMonth === "*")
-    && (month      ==  now.getMonth() + 1    || month      === "*")
-    && (dayOfWeek  === dayStr[now.getDay()]  || dayOfWeek  === "*")
-    && (weekNum == parseInt(now.getDate() / 7) + 1 || weekNum === "*")
-    ) {
-      pushMessage(to, message);
-    }
+    // 本文と発言する場所が空の場合はスキップ
+    if (message === "" || to === "") { continue; }
+
+    if ( (year       ==  now.getFullYear()               || year       === "")
+      && (month      ==  now.getMonth() + 1              || month      === "")
+      && (dayOfMonth ==  now.getDate()                   || dayOfMonth === "")
+      && (weekNum    ==  parseInt(now.getDate() / 7) + 1 || weekNum    === "")
+      && (dayOfWeek  === dayStr[now.getDay()]            || dayOfWeek  === "")
+      && (hour       ==  now.getHours()                  || hour       === "")
+      && (minute     ==  now.getMinutes()                || minute     === "")
+      ) {
+        pushMessage(to, message);
+      }
   }
 }
